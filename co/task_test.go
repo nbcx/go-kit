@@ -1,10 +1,11 @@
 package co
 
 import (
-	"kit/k"
 	"reflect"
 	"testing"
 	"time"
+
+	"github.com/nbcx/kit/k"
 )
 
 func TestTask(t *testing.T) {
