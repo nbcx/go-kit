@@ -5,9 +5,9 @@ import (
 	"time"
 )
 
-var ErrGoTimeout = errors.New("go timeout func")
+var ErrTimeout = errors.New("go timeout func")
 
-func GoFunc(f func() error) chan error {
+func Func(f func() error) chan error {
 	ch := make(chan error)
 	go func() {
 		ch <- f()
@@ -15,21 +15,21 @@ func GoFunc(f func() error) chan error {
 	return ch
 }
 
-func GoTimeoutFunc(timeout time.Duration, f func() error) chan error {
+func Timeout(timeout time.Duration, f func() error) chan error {
 	ch := make(chan error)
 	go func() {
 		var err error
 		select {
-		case err = <-GoFunc(f):
+		case err = <-Func(f):
 			ch <- err
 		case <-time.After(timeout):
-			ch <- ErrGoTimeout
+			ch <- ErrTimeout
 		}
 	}()
 	return ch
 }
 
-func GoTimeout(f func() error, timeout time.Duration) (err error) {
+func TimeoutWait(f func() error, timeout time.Duration) (err error) {
 	done := make(chan bool)
 	go func() {
 		err = f()
@@ -37,7 +37,7 @@ func GoTimeout(f func() error, timeout time.Duration) (err error) {
 	}()
 	select {
 	case <-time.After(timeout):
-		return ErrGoTimeout
+		return ErrTimeout
 	case <-done:
 		return
 	}
