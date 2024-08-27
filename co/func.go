@@ -29,7 +29,7 @@ func Timeout(timeout time.Duration, f func() error) chan error {
 	return ch
 }
 
-func TimeoutWait(f func() error, timeout time.Duration) (err error) {
+func TimeoutWait(timeout time.Duration, f func() error) (err error) {
 	done := make(chan bool)
 	go func() {
 		err = f()
