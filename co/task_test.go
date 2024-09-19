@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nbcx/kit/k"
+	"github.com/nbcx/go-kit/k"
 )
 
 func TestTask(t *testing.T) {
