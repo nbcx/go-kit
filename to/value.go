@@ -3,6 +3,7 @@ package to
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 type Value string
@@ -133,6 +134,11 @@ func (v Value) String() string {
 	return string(v)
 }
 
+func (v Value) Split(sep string) Values[string] {
+	sp := strings.Split(string(v), sep)
+	return sp
+}
+
 type Values[T any] []T
 
 func ValuesF[T any](v []T) Values[T] {
@@ -156,6 +162,13 @@ func (v Values[T]) Int() (i []int) {
 func (v Values[T]) String() (i []string) {
 	for _, vv := range v {
 		i = append(i, ValueF(vv).String())
+	}
+	return
+}
+
+func (v Values[T]) First() (val Value) {
+	for _, vv := range v {
+		return ValueF(vv)
 	}
 	return
 }
