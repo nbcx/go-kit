@@ -7,35 +7,6 @@ import (
 	"strings"
 )
 
-// type Steam struct {
-// 	v any
-// }
-
-// func SteamF(v any) *Steam {
-// 	return &Steam{v: v}
-// }
-
-// func (s *Steam) Any() any {
-// 	return s.v
-// }
-
-// func (s *Steam) IsNil() bool {
-// 	return s == nil || s.v == nil
-// }
-
-// Int returns input as an int
-// func (s *Steam) Int() int {
-// 	i, _ := s.IntE()
-// 	return i
-// }
-
-// func (s *Steam) IntE() (int, error) {
-// 	if v, ok := s.v.(int); ok {
-// 		return v, nil
-// 	}
-// 	return strconv.Atoi(fmt.Sprint(s.v))
-// }
-
 type Value struct {
 	v any
 }
